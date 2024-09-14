@@ -1,4 +1,5 @@
-import { Layout } from 'antd'
+import { Layout, Spin } from 'antd'
+import { Suspense } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
 export const App = () => {
@@ -16,7 +17,9 @@ export const App = () => {
           overflowY: 'auto',
         }}
       >
-        <Outlet />
+        <Suspense fallback={<Spin />}>
+          <Outlet />
+        </Suspense>
       </Layout.Content>
     </Layout>
   )
