@@ -6,6 +6,7 @@ import { lazy } from 'react'
 // Lazily loaded pages
 const Home = lazy(() => import('../pages/Home'))
 const Movie = lazy(() => import('../pages/Movie'))
+const Favorites = lazy(() => import('../pages/Favorites'))
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        element: <Favorites />,
+        path: '/favorites',
       },
       {
         element: <Movie />,
