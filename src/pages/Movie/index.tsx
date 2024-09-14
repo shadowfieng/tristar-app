@@ -1,28 +1,34 @@
-import { Button, Card, Descriptions, Space } from 'antd'
+import { ArrowLeftOutlined } from '@ant-design/icons'
+import { Button, Card, Descriptions, Space, Spin } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import { useNavigate, useParams } from 'react-router-dom'
 import { moviesApi } from '../../api/moviesApi'
+import styles from './Movie.module.css'
 
-export const Movie = () => {
+const Movie = () => {
   const { movieId } = useParams()
   const navigate = useNavigate()
 
-  const { data: movie } = moviesApi.useGetMovieByIdQuery(movieId ?? '')
+  const { data: movie, isFetching } = moviesApi.useGetMovieByIdQuery(
+    movieId ?? ''
+  )
 
+  if (isFetching) return <Spin size='large' />
   if (!movie) return <div>No movie found!</div>
 
   return (
     <>
       <Button
         type='link'
+        icon={<ArrowLeftOutlined />}
+        iconPosition='start'
         style={{ marginBottom: '2rem' }}
         onClick={() => navigate(-1)}
       >
-        Go home
+        Go back to search
       </Button>
-      <Space size='middle' align='start'>
+      <Space className={styles.page} size='middle' align='start'>
         <Card
-          hoverable
           style={{ width: 340 }}
           cover={
             <img
@@ -67,3 +73,5 @@ export const Movie = () => {
     </>
   )
 }
+
+export default Movie
