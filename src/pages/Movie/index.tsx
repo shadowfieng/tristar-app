@@ -1,13 +1,12 @@
-import { ArrowLeftOutlined } from '@ant-design/icons'
-import { Button, Card, Descriptions, Space, Spin } from 'antd'
+import { Card, Descriptions, Space, Spin } from 'antd'
 import Meta from 'antd/es/card/Meta'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { moviesApi } from '../../api/moviesApi'
+import { GoBackButton } from '../../components'
 import styles from './Movie.module.css'
 
 const Movie = () => {
   const { movieId } = useParams()
-  const navigate = useNavigate()
 
   const { data: movie, isFetching } = moviesApi.useGetMovieByIdQuery(
     movieId ?? ''
@@ -18,15 +17,7 @@ const Movie = () => {
 
   return (
     <>
-      <Button
-        type='link'
-        icon={<ArrowLeftOutlined />}
-        iconPosition='start'
-        style={{ marginBottom: '2rem' }}
-        onClick={() => navigate(-1)}
-      >
-        Go back to search
-      </Button>
+      <GoBackButton />
       <Space className={styles.page} size='middle' align='start'>
         <Card
           style={{ width: 340 }}
