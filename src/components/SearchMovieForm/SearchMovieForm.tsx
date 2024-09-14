@@ -1,17 +1,21 @@
 import { Button, Form, FormProps, Input } from 'antd'
 import styles from './SearchMovieForm.module.css'
+import { moviesApi } from '../../api'
+import { useSearchParams } from 'react-router-dom'
 
 type FieldType = {
-  movie?: string
+  movie: string
 }
 
-type Props = {
-  onSubmit: (value: FieldType) => void
-}
+export const SearchMovieForm = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const searchValue = searchParams.get('s') ?? ''
+  const [searchMovieMyName, { isLoading }] =
+    moviesApi.useLazySearchMovieByNameQuery()
 
-export const SearchMovieForm = ({ onSubmit }: Props) => {
   const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-    onSubmit(values)
+    searchMovieMyName(values.movie)
+    setSearchParams(new URLSearchParams({ s: values.movie }))
   }
 
   const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (
@@ -25,6 +29,7 @@ export const SearchMovieForm = ({ onSubmit }: Props) => {
       className={styles.form}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
+      initialValues={{ movie: searchValue }}
     >
       <Form.Item<FieldType>
         label='Movie'
@@ -33,7 +38,9 @@ export const SearchMovieForm = ({ onSubmit }: Props) => {
       >
         <Input />
       </Form.Item>
-      <Button>Search</Button>
+      <Button loading={isLoading} htmlType='submit'>
+        Search
+      </Button>
     </Form>
   )
 }
