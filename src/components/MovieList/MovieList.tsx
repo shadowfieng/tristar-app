@@ -15,9 +15,10 @@ export const MovieList = () => {
   return (
     <Row gutter={[16, 16]}>
       {moviesData?.Search.map((movie) => (
-        <Col key={movie.imdbID} span={4}>
+        <Col key={movie.imdbID} span={6}>
           <Link to={`/movie/${movie.imdbID}`}>
             <Movie
+              id={movie.imdbID}
               title={movie.Title}
               description={movie.Year}
               posterImg={movie.Poster}
