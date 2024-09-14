@@ -1,50 +1,73 @@
-# React + TypeScript + Vite
+# Tristar-App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a movie search and favorites management application built with **Vite**, **Redux Toolkit Query (RTK Query)**, and **redux-persist** for storing favorite movies. The app allows users to search for movies, view movie details, and save their favorite movies.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Search for movies via an API.
+- View detailed information about movies.
+- Mark movies as favorites and store them persistently using `redux-persist`.
+- Navigate between pages using a router.
+- Modular components for reusability and separation of concerns.
 
-## Expanding the ESLint configuration
+## Technologies
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Vite**: Fast build tool for modern web projects.
+- **Redux Toolkit**: For state management.
+- **RTK Query**: For managing data fetching and caching.
+- **redux-persist**: To persist favorite movies across sessions.
+- **React Router**: For routing between different pages.
+- **TypeScript**: For type-safe development.
 
-- Configure the top-level `parserOptions` property like this:
+## Project Structure
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+├── src
+│ ├── api # API services using RTK Query
+│ │ ├── moviesApi.ts # Movie-related API calls
+│ └── components # Reusable components
+│ ├── FavoritesLink # Link to favorites page
+│ ├── GoBackButton # Reusable back button
+│ ├── Movie # Movie card component
+│ ├── MovieList # List of movies
+│ ├── SearchMovieForm # Movie search form
+│ ├── pages # Pages for routing
+│ ├── Favorites # Favorites page
+│ ├── Home # Home page
+│ ├── Movie # Movie details page
+│ ├── router # Application routing setup
+│ ├── store # Redux store and slices
+│ ├── hooks.ts # Custom Redux hooks
+│ └── slices # Slices for different features
+│ ├── App.tsx # Main application component
+│ ├── main.tsx # Application entry point
+├── .env # Environment variables
+├── .husky # Pre-commit hooks
+└── .prettierrc # Prettier configuration
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Getting Started
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Prerequisites
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+- **Node.js** (v14.x or later)
+- **PNPM**
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/shadowfieng/tristar-app
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd tristar-app
+   ```
+3. Install dependencies:
+   ```bash
+   pnpm i
+   ```
+### Running the project
+```bash
+  pnpm dev
 ```
