@@ -67,6 +67,11 @@ This project is a movie search and favorites management application built with *
    ```bash
    pnpm i
    ```
+4. Create your .env file and paste:
+   ```bash
+   VITE_OMDB_BASE_URL=http://www.omdbapi.com/
+   VITE_OMDB_API_KEY=<your-api-key>
+   ```
 ### Running the project
 ```bash
   pnpm dev
